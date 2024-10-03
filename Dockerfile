@@ -8,4 +8,4 @@ RUN npm install --production && npm install typescript ts-node
 
 COPY . .
 
-CMD ["npx", "ts-node", "index.ts"]
+CMD ["npx", "ts-node", "src/index.ts"]

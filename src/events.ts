@@ -16,6 +16,8 @@ export async function syncEvents(client: Client, guildId: string) {
   // Convert Google Calendar events into a format for comparison (timestamps for start and end)
   const googleEventData = googleEvents.map((event) => ({
     summary: event.summary!.trim(),
+    description: event.description || "No description available.",
+    location: event.location || "Online",
     startTimestamp: new Date(
       event.start?.dateTime || event.start?.date!
     ).getTime(),
@@ -51,9 +53,9 @@ export async function syncEvents(client: Client, guildId: string) {
         privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly,
         entityType: GuildScheduledEventEntityType.External,
         entityMetadata: {
-          location: "Online", // You can customize this if necessary
+          location: googleEvent.location || "Online",
         },
-        description: "Event synced from Google Calendar.",
+        description: googleEvent.description || "No description available.",
       };
 
       await guild.scheduledEvents.create(eventOptions);

@@ -94,7 +94,7 @@ async function getGoogleCalendarEvents() {
     const calendar = google.calendar({ version: "v3", auth: apiKey });
     var start = new Date();
     var end = new Date(+start);
-    end.setDate(end.getDate() + 30);
+    end.setDate(end.getDate() + 90);
 
     const response = await calendar.events.list({
       calendarId,
